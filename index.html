@@ -714,6 +714,114 @@
             transition: width 0.3s ease;
         }
 
+        /* Full-screen PDF viewer styles */
+        .fullscreen-pdf {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .fullscreen-pdf .pdf-container {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            border-radius: 0;
+            box-shadow: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
+        .fullscreen-pdf #pdf-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .fullscreen-controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+
+        .fullscreen-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .fullscreen-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1001;
+        }
+
+        .fullscreen-nav-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-nav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .fullscreen-page-indicator {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 1001;
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -1004,6 +1112,29 @@
         </div>
     </footer>
 
+    <!-- Full-screen PDF viewer (initially hidden) -->
+    <div id="fullscreen-pdf" class="fullscreen-pdf" style="display: none;">
+        <div class="fullscreen-controls">
+            <button class="fullscreen-btn" id="exit-fullscreen">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="pdf-container">
+            <canvas id="fullscreen-canvas"></canvas>
+        </div>
+        <div class="fullscreen-page-indicator">
+            <span id="fullscreen-current-page">1</span> / <span id="fullscreen-total-pages">0</span>
+        </div>
+        <div class="fullscreen-nav">
+            <button class="fullscreen-nav-btn" id="fullscreen-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="fullscreen-nav-btn" id="fullscreen-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
     <script>
         // Your existing JavaScript code remains exactly the same...
         // Supabase Configuration with your credentials
@@ -1035,7 +1166,6 @@
             document.getElementById('supabase-message').textContent = "Failed to connect to Supabase. Please check your credentials.";
         }
 
-        // ... rest of your JavaScript code remains exactly the same ...
         document.addEventListener('DOMContentLoaded', function() {
             const navBtns = document.querySelectorAll('.nav-btn');
             const sections = document.querySelectorAll('.section');
@@ -1083,10 +1213,20 @@
             const magazineDate = document.getElementById('magazine-date');
             const magazineDescription = document.getElementById('magazine-description');
             
+            // Full-screen PDF elements
+            const fullscreenPdf = document.getElementById('fullscreen-pdf');
+            const fullscreenCanvas = document.getElementById('fullscreen-canvas');
+            const exitFullscreenBtn = document.getElementById('exit-fullscreen');
+            const fullscreenPrevBtn = document.getElementById('fullscreen-prev');
+            const fullscreenNextBtn = document.getElementById('fullscreen-next');
+            const fullscreenCurrentPageEl = document.getElementById('fullscreen-current-page');
+            const fullscreenTotalPagesEl = document.getElementById('fullscreen-total-pages');
+            
             let selectedFile = null;
             let selectedCoverFile = null;
             let currentMagazine = null;
             let pdfPageSize = { width: 0, height: 0 };
+            let isFullscreen = false;
             
             // Authentication functions
             function login(username, password) {
@@ -1370,6 +1510,8 @@
                     
                     totalPagesEl.textContent = totalPages;
                     currentPageEl.textContent = currentPageNum;
+                    fullscreenTotalPagesEl.textContent = totalPages;
+                    fullscreenCurrentPageEl.textContent = currentPageNum;
                     
                     // Get first page to determine page size
                     const firstPage = await currentPdf.getPage(1);
@@ -1420,9 +1562,53 @@
                     
                     await page.render(renderContext).promise;
                     currentPageEl.textContent = pageNum;
+                    fullscreenCurrentPageEl.textContent = pageNum;
+                    
+                    // If in fullscreen mode, render to fullscreen canvas as well
+                    if (isFullscreen) {
+                        await renderFullscreenPage(pageNum);
+                    }
                     
                 } catch (error) {
                     console.error('Error rendering page:', error);
+                }
+            }
+            
+            // Render page in fullscreen mode
+            async function renderFullscreenPage(pageNum) {
+                if (!currentPdf) return;
+                
+                try {
+                    const page = await currentPdf.getPage(pageNum);
+                    
+                    // Calculate scale to fit screen
+                    const screenWidth = window.innerWidth;
+                    const screenHeight = window.innerHeight;
+                    
+                    // Calculate scale to fit width or height, whichever is smaller
+                    const scaleX = screenWidth / page.getViewport({ scale: 1 }).width;
+                    const scaleY = screenHeight / page.getViewport({ scale: 1 }).height;
+                    const fullscreenScale = Math.min(scaleX, scaleY) * 0.95; // 95% to add some padding
+                    
+                    const viewport = page.getViewport({ scale: fullscreenScale });
+                    
+                    const canvas = fullscreenCanvas;
+                    const context = canvas.getContext('2d');
+                    
+                    // Set canvas to fit screen
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    
+                    const renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    
+                    await page.render(renderContext).promise;
+                    fullscreenCurrentPageEl.textContent = pageNum;
+                    
+                } catch (error) {
+                    console.error('Error rendering fullscreen page:', error);
                 }
             }
             
@@ -1446,6 +1632,10 @@
             arrowRight.addEventListener('click', goToNextPage);
             bottomPrev.addEventListener('click', goToPrevPage);
             bottomNext.addEventListener('click', goToNextPage);
+            
+            // Fullscreen navigation
+            fullscreenPrevBtn.addEventListener('click', goToPrevPage);
+            fullscreenNextBtn.addEventListener('click', goToNextPage);
             
             // Zoom functionality
             zoomInBtn.addEventListener('click', function() {
@@ -1528,6 +1718,45 @@
             // Back to home button
             backToHomeBtn.addEventListener('click', function() {
                 showSection('home');
+            });
+            
+            // Fullscreen functionality
+            function enterFullscreen() {
+                isFullscreen = true;
+                fullscreenPdf.style.display = 'flex';
+                renderFullscreenPage(currentPageNum);
+            }
+            
+            function exitFullscreen() {
+                isFullscreen = false;
+                fullscreenPdf.style.display = 'none';
+                renderPage(currentPageNum);
+            }
+            
+            // Exit fullscreen button
+            exitFullscreenBtn.addEventListener('click', exitFullscreen);
+            
+            // Toggle fullscreen on canvas click (mobile-friendly)
+            pdfCanvas.addEventListener('click', function() {
+                // Check if device is mobile (touch screen)
+                if ('ontouchstart' in window || navigator.maxTouchPoints) {
+                    enterFullscreen();
+                }
+            });
+            
+            // Also allow fullscreen on desktop with double-click
+            pdfCanvas.addEventListener('dblclick', function() {
+                enterFullscreen();
+            });
+            
+            // Handle back button press (Android)
+            document.addEventListener('backbutton', exitFullscreen, false);
+            
+            // Handle escape key press
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isFullscreen) {
+                    exitFullscreen();
+                }
             });
             
             // File upload handling
@@ -1773,7 +2002,11 @@
                 } else if (e.key === 'ArrowLeft') {
                     goToPrevPage();
                 } else if (e.key === 'Escape') {
-                    backToHomeBtn.click();
+                    if (isFullscreen) {
+                        exitFullscreen();
+                    } else {
+                        backToHomeBtn.click();
+                    }
                 }
             });
             
