@@ -19,6 +19,8 @@
             background: linear-gradient(135deg, #0c2461, #1e3799, #4a69bd);
             color: #fff;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
@@ -26,9 +28,10 @@
             width: 100%;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
         }
 
-        /* New Header Styles */
+        /* Header Styles */
         .main-header {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px 0;
@@ -56,7 +59,6 @@
             gap: 10px;
         }
 
-        /* Updated logo styles for rectangular logo - no drop shadow */
         .logo-image {
             max-width: 300px;
             height: auto;
@@ -129,33 +131,7 @@
             display: block;
         }
 
-        /* Login Styles */
-        .login-status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .status-logged-in {
-            color: #27ae60;
-        }
-
-        .status-logged-out {
-            color: #e74c3c;
-        }
-
-        .logout-btn {
-            background: #e74c3c;
-            margin-top: 10px;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-        }
-
-        /* Homepage Grid Styles */
+        /* Magazine Grid Styles */
         .magazine-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -222,57 +198,6 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Skeleton Loading */
-        .skeleton-loader {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        .skeleton-cover {
-            width: 100%;
-            height: 320px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .skeleton-info {
-            padding: 15px;
-        }
-
-        .skeleton-title {
-            height: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .skeleton-date {
-            height: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin-bottom: 15px;
-            width: 60%;
-        }
-
-        .skeleton-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .skeleton-btn {
-            height: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            width: 45%;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
         /* PDF Viewer Styles */
         .pdf-viewer-container {
             width: 100%;
@@ -316,10 +241,6 @@
         .btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
-        }
-
-        .btn:active {
-            transform: translateY(1px);
         }
 
         .btn-primary {
@@ -442,123 +363,15 @@
             transform: scale(1.1);
         }
 
-        /* Upload Section Styles */
-        .upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 30px 20px;
-            margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .upload-area:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .upload-area i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            opacity: 0.7;
-        }
-
-        .upload-area p {
-            margin-bottom: 10px;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .supabase-status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            text-align: left;
-        }
-
-        .status-connected {
-            color: #27ae60;
-        }
-
-        .status-disconnected {
-            color: #e74c3c;
-        }
-
-        .magazine-form {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .form-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-
-        .cover-upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .cover-upload-area:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .cover-upload-area i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-
-        .cover-preview {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .cover-preview img {
-            max-width: 200px;
-            max-height: 280px;
-            border-radius: 5px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* New Footer Styles */
+        /* Footer Styles - FIXED */
         .main-footer {
             background: rgba(255, 255, 255, 0.95);
             padding: 25px 0;
-            margin-top: 50px;
+            margin-top: auto;
             border-radius: 15px 15px 0 0;
             box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 100;
         }
 
         .footer-content {
@@ -578,7 +391,6 @@
             gap: 15px;
         }
 
-        /* Updated footer logo styles for rectangular logo - no drop shadow */
         .footer-logo .logo-image {
             max-width: 100px;
             height: auto;
@@ -622,98 +434,6 @@
             text-align: right;
         }
 
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            opacity: 0.8;
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
-
-        .pdf-loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px;
-            flex-direction: column;
-            gap: 20px;
-            color: #333;
-        }
-
-        .pdf-skeleton {
-            width: 300px;
-            height: 400px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: 8px;
-            margin: 0 auto;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .zoom-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .zoom-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .zoom-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #27ae60;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
         /* Full-screen PDF viewer styles */
         .fullscreen-pdf {
             position: fixed;
@@ -744,11 +464,13 @@
             background: #000;
         }
 
-        .fullscreen-pdf #pdf-canvas {
+        .fullscreen-pdf #fullscreen-canvas {
             max-width: 100%;
             max-height: 100%;
             width: auto;
             height: auto;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
         .fullscreen-controls {
@@ -822,6 +544,78 @@
             z-index: 1001;
         }
 
+        /* Loading and other styles */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.8;
+        }
+
+        .pdf-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            flex-direction: column;
+            gap: 20px;
+            color: #333;
+        }
+
+        .pdf-skeleton {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive styles */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -911,11 +705,10 @@
     </style>
 </head>
 <body>
-    <!-- New Header -->
+    <!-- Header -->
     <header class="main-header">
         <div class="header-content">
             <div class="logo-section">
-                <!-- Replace 'logo.png' with your actual logo file path -->
                 <img src="logo.png" alt="Bhavasara Disha Logo" class="logo-image">
                 <div class="org-text">
                     <h1>BHAVASAR <span style="color: #e74c3c;">VISION INDIA</span></h1>
@@ -976,18 +769,6 @@
                     <label for="magazine-description">Description</label>
                     <textarea id="magazine-description" placeholder="Enter magazine description"></textarea>
                 </div>
-                <div class="form-group">
-                    <label>Cover Image</label>
-                    <div class="cover-upload-area" id="cover-upload-area">
-                        <i class="fas fa-image"></i>
-                        <p>Click to select a cover image</p>
-                        <p class="file-size">Maximum file size: 20MB</p>
-                        <input type="file" id="cover-input" class="file-input" accept="image/*">
-                    </div>
-                    <div class="cover-preview" id="cover-preview">
-                        <p>No cover image selected</p>
-                    </div>
-                </div>
             </div>
             
             <div class="pdf-controls">
@@ -1002,11 +783,6 @@
             <div class="login-status">
                 <h3>Editor Status: <span id="editor-status" class="status-logged-in">Logged In</span></h3>
                 <p id="editor-message">Welcome, nayana! You have upload access.</p>
-            </div>
-            
-            <div class="supabase-status">
-                <h3>Supabase Status: <span id="supabase-status" class="status-connected">Connected</span></h3>
-                <p id="supabase-message">Your magazines are being loaded from Supabase</p>
             </div>
         </section>
 
@@ -1092,7 +868,7 @@
         </section>
     </div>
 
-    <!-- New Footer -->
+    <!-- Footer - FIXED -->
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-logo">
@@ -1136,8 +912,7 @@
     </div>
 
     <script>
-        // Your existing JavaScript code remains exactly the same...
-        // Supabase Configuration with your credentials
+        // Supabase Configuration
         const SUPABASE_URL = 'https://rpfyqianbgxdqglcqoqz.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwZnlxaWFuYmd4ZHFnbGNxb3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MzAxMjEsImV4cCI6MjA4MDAwNjEyMX0.aRsTpje9YXNrj8HpvUCnRSsfSazpboyJli49424dmV0';
         
@@ -1149,7 +924,7 @@
         let currentPdf = null;
         let currentPageNum = 1;
         let totalPages = 0;
-        let scale = 1.5; // Default zoom set to 150%
+        let scale = 1.5;
         let maxScale = 3.0;
         let minScale = 0.3;
         
@@ -1161,20 +936,15 @@
             console.log("Supabase connected successfully");
         } catch (error) {
             console.error("Supabase initialization error:", error);
-            document.getElementById('supabase-status').textContent = "Connection Failed";
-            document.getElementById('supabase-status').className = "status-disconnected";
-            document.getElementById('supabase-message').textContent = "Failed to connect to Supabase. Please check your credentials.";
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
             const navBtns = document.querySelectorAll('.nav-btn');
             const sections = document.querySelectorAll('.section');
             const magazineGrid = document.getElementById('magazine-grid');
             const uploadArea = document.getElementById('upload-area');
             const fileInput = document.getElementById('file-input');
-            const coverUploadArea = document.getElementById('cover-upload-area');
-            const coverInput = document.getElementById('cover-input');
-            const coverPreview = document.getElementById('cover-preview');
             const uploadBtn = document.getElementById('upload-btn');
             const backToHomeBtn = document.getElementById('back-to-home');
             const uploadProgress = document.getElementById('upload-progress');
@@ -1223,9 +993,7 @@
             const fullscreenTotalPagesEl = document.getElementById('fullscreen-total-pages');
             
             let selectedFile = null;
-            let selectedCoverFile = null;
             let currentMagazine = null;
-            let pdfPageSize = { width: 0, height: 0 };
             let isFullscreen = false;
             
             // Authentication functions
@@ -1249,28 +1017,20 @@
             
             function updateAuthUI() {
                 if (isEditorLoggedIn) {
-                    // Show upload button, hide login button
                     uploadNavBtn.style.display = 'flex';
                     loginNavBtn.style.display = 'none';
-                    
-                    // Update status messages
                     editorStatus.textContent = 'Logged In';
                     editorStatus.className = 'status-logged-in';
                     editorMessage.textContent = 'Welcome, nayana! You have upload access.';
-                    
                     loginStatus.textContent = 'Logged In';
                     loginStatus.className = 'status-logged-in';
                     loginMessage.textContent = 'Welcome, nayana! You have upload access.';
                 } else {
-                    // Hide upload button, show login button
                     uploadNavBtn.style.display = 'none';
                     loginNavBtn.style.display = 'flex';
-                    
-                    // Update status messages
                     editorStatus.textContent = 'Not Logged In';
                     editorStatus.className = 'status-logged-out';
                     editorMessage.textContent = 'Please login to access upload features';
-                    
                     loginStatus.textContent = 'Not Logged In';
                     loginStatus.className = 'status-logged-out';
                     loginMessage.textContent = 'Please login to access upload features';
@@ -1286,7 +1046,6 @@
                     }
                 });
                 
-                // Update active nav button
                 navBtns.forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.getAttribute('data-section') === sectionId) {
@@ -1299,7 +1058,6 @@
                 btn.addEventListener('click', function() {
                     const targetSection = this.getAttribute('data-section');
                     
-                    // Check if trying to access upload without login
                     if (targetSection === 'upload' && !isEditorLoggedIn) {
                         alert('Please login as editor to access upload functionality');
                         showSection('login');
@@ -1333,16 +1091,13 @@
                 }
             });
             
-            // Load magazines from Supabase with skeleton loading
+            // Load magazines from Supabase
             async function loadMagazines() {
                 if (!supabase) {
                     console.error("Supabase not initialized");
-                    magazineGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Supabase connection failed. Please check your credentials.</p></div>';
+                    magazineGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Supabase connection failed.</p></div>';
                     return;
                 }
-                
-                // Show skeleton loading
-                showSkeletonLoading();
                 
                 try {
                     const { data: magazines, error } = await supabase
@@ -1352,35 +1107,14 @@
                     
                     if (error) {
                         console.error('Error loading magazines:', error);
-                        magazineGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading magazines. Please check your Supabase configuration.</p></div>';
+                        magazineGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading magazines.</p></div>';
                         return;
                     }
                     
                     displayMagazines(magazines || []);
                 } catch (error) {
                     console.error('Error loading magazines:', error);
-                    magazineGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading magazines. Please check your Supabase configuration.</p></div>';
-                }
-            }
-            
-            // Show skeleton loading
-            function showSkeletonLoading() {
-                magazineGrid.innerHTML = '';
-                for (let i = 0; i < 6; i++) {
-                    const skeleton = document.createElement('div');
-                    skeleton.className = 'skeleton-loader';
-                    skeleton.innerHTML = `
-                        <div class="skeleton-cover"></div>
-                        <div class="skeleton-info">
-                            <div class="skeleton-title"></div>
-                            <div class="skeleton-date"></div>
-                            <div class="skeleton-actions">
-                                <div class="skeleton-btn"></div>
-                                <div class="skeleton-btn"></div>
-                            </div>
-                        </div>
-                    `;
-                    magazineGrid.appendChild(skeleton);
+                    magazineGrid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading magazines.</p></div>';
                 }
             }
             
@@ -1458,11 +1192,9 @@
             async function openMagazine(magazineId, magazines) {
                 let magazine;
                 
-                // If magazines array is provided, use it
                 if (magazines) {
                     magazine = magazines.find(m => m.id == magazineId);
                 } else {
-                    // Otherwise, fetch the magazine from Supabase
                     if (!supabase) return;
                     
                     try {
@@ -1487,21 +1219,16 @@
                 if (!magazine) return;
                 
                 currentMagazine = magazine;
-                
-                // Show PDF viewer section
                 showSection('pdf-viewer');
-                
-                // Load and display the PDF
                 await loadPdf(magazine.file_url);
             }
             
-            // Load PDF using PDF.js with skeleton loading
+            // Load PDF using PDF.js
             async function loadPdf(pdfUrl) {
                 try {
                     pdfLoading.style.display = 'flex';
                     pdfCanvas.style.display = 'none';
                     
-                    // Load the PDF document
                     const loadingTask = pdfjsLib.getDocument(pdfUrl);
                     currentPdf = await loadingTask.promise;
                     
@@ -1512,14 +1239,6 @@
                     currentPageEl.textContent = currentPageNum;
                     fullscreenTotalPagesEl.textContent = totalPages;
                     fullscreenCurrentPageEl.textContent = currentPageNum;
-                    
-                    // Get first page to determine page size
-                    const firstPage = await currentPdf.getPage(1);
-                    const viewport = firstPage.getViewport({ scale: 1 });
-                    pdfPageSize = {
-                        width: viewport.width,
-                        height: viewport.height
-                    };
                     
                     // Set default zoom to 150%
                     scale = 1.5;
@@ -1574,14 +1293,17 @@
                 }
             }
             
-            // Render page in fullscreen mode
+            // Render page in fullscreen mode with HIGH DPI
             async function renderFullscreenPage(pageNum) {
                 if (!currentPdf) return;
                 
                 try {
                     const page = await currentPdf.getPage(pageNum);
                     
-                    // Calculate scale to fit screen
+                    // Get device pixel ratio for high DPI rendering
+                    const pixelRatio = window.devicePixelRatio || 1;
+                    
+                    // Calculate scale to fit screen with high DPI
                     const screenWidth = window.innerWidth;
                     const screenHeight = window.innerHeight;
                     
@@ -1590,14 +1312,19 @@
                     const scaleY = screenHeight / page.getViewport({ scale: 1 }).height;
                     const fullscreenScale = Math.min(scaleX, scaleY) * 0.95; // 95% to add some padding
                     
-                    const viewport = page.getViewport({ scale: fullscreenScale });
+                    // Apply pixel ratio for high DPI rendering
+                    const viewport = page.getViewport({ scale: fullscreenScale * pixelRatio });
                     
                     const canvas = fullscreenCanvas;
                     const context = canvas.getContext('2d');
                     
-                    // Set canvas to fit screen
+                    // Set canvas to fit screen with high DPI
                     canvas.width = viewport.width;
                     canvas.height = viewport.height;
+                    
+                    // Scale the canvas for high DPI displays
+                    canvas.style.width = (viewport.width / pixelRatio) + 'px';
+                    canvas.style.height = (viewport.height / pixelRatio) + 'px';
                     
                     const renderContext = {
                         canvasContext: context,
@@ -1668,7 +1395,9 @@
             
             // Handle window resize
             window.addEventListener('resize', function() {
-                if (currentPdf) {
+                if (currentPdf && isFullscreen) {
+                    renderFullscreenPage(currentPageNum);
+                } else if (currentPdf) {
                     renderPage(currentPageNum);
                 }
             });
@@ -1706,7 +1435,6 @@
                     return;
                 }
                 
-                // Create a temporary link to download the file
                 const link = document.createElement('a');
                 link.href = magazine.file_url;
                 link.download = `${magazine.title}.pdf`;
@@ -1749,13 +1477,14 @@
                 enterFullscreen();
             });
             
-            // Handle back button press (Android)
-            document.addEventListener('backbutton', exitFullscreen, false);
-            
             // Handle escape key press
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && isFullscreen) {
                     exitFullscreen();
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    goToNextPage();
+                } else if (e.key === 'ArrowLeft') {
+                    goToPrevPage();
                 }
             });
             
@@ -1764,41 +1493,9 @@
                 fileInput.click();
             });
             
-            uploadArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#27ae60';
-                uploadArea.style.background = 'rgba(39, 174, 96, 0.1)';
-            });
-            
-            uploadArea.addEventListener('dragleave', function() {
-                uploadArea.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                uploadArea.style.background = 'transparent';
-            });
-            
-            uploadArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                uploadArea.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                uploadArea.style.background = 'transparent';
-                
-                if (e.dataTransfer.files.length > 0) {
-                    handleFileSelection(e.dataTransfer.files[0]);
-                }
-            });
-            
             fileInput.addEventListener('change', function() {
                 if (this.files.length > 0) {
                     handleFileSelection(this.files[0]);
-                }
-            });
-            
-            // Cover image upload handling
-            coverUploadArea.addEventListener('click', function() {
-                coverInput.click();
-            });
-            
-            coverInput.addEventListener('change', function() {
-                if (this.files.length > 0) {
-                    handleCoverSelection(this.files[0]);
                 }
             });
             
@@ -1827,31 +1524,6 @@
                 }
             }
             
-            function handleCoverSelection(file) {
-                if (!file.type.startsWith('image/')) {
-                    alert('Please select an image file.');
-                    return;
-                }
-                
-                // Cover image size limit to 20MB
-                if (file.size > 20 * 1024 * 1024) {
-                    alert('Cover image size exceeds 20MB limit.');
-                    return;
-                }
-                
-                selectedCoverFile = file;
-                
-                // Create preview
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    coverPreview.innerHTML = `
-                        <img src="${e.target.result}" alt="Cover Preview">
-                        <p>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</p>
-                    `;
-                };
-                reader.readAsDataURL(file);
-            }
-            
             // Enable upload button when form is filled
             magazineTitle.addEventListener('input', checkFormValidity);
             magazineDate.addEventListener('input', checkFormValidity);
@@ -1864,7 +1536,7 @@
                 }
             }
             
-            // Upload magazine to Supabase - FIXED COVER UPLOAD
+            // Upload magazine to Supabase
             uploadBtn.addEventListener('click', async function() {
                 if (!selectedFile) {
                     alert('Please select a PDF file first.');
@@ -1877,7 +1549,7 @@
                 }
                 
                 if (!supabase) {
-                    alert('Supabase is not configured. Please add your Supabase configuration.');
+                    alert('Supabase is not configured.');
                     return;
                 }
                 
@@ -1887,7 +1559,7 @@
                 progressFill.style.width = '0%';
                 
                 try {
-                    // Step 1: Upload PDF file to Supabase Storage
+                    // Upload PDF file to Supabase Storage
                     const fileExt = selectedFile.name.split('.').pop();
                     const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
                     const filePath = `magazines/${fileName}`;
@@ -1898,42 +1570,21 @@
                     
                     if (fileError) {
                         if (fileError.message.includes('bucket')) {
-                            throw new Error('Storage bucket "magazine-files" does not exist. Please create it in your Supabase dashboard.');
+                            throw new Error('Storage bucket "magazine-files" does not exist.');
                         }
                         throw new Error(`File upload failed: ${fileError.message}`);
                     }
                     
                     progressFill.style.width = '50%';
                     
-                    // Step 2: Upload cover image if provided - FIXED VERSION
-                    let coverUrl = null;
-                    if (selectedCoverFile) {
-                        const coverExt = selectedCoverFile.name.split('.').pop();
-                        // FIX: Use prefix instead of folder
-                        const coverFileName = `cover_${fileName}`;
-                        
-                        const { data: coverData, error: coverError } = await supabase.storage
-                            .from('magazine-files')
-                            .upload(coverFileName, selectedCoverFile);
-                        
-                        if (!coverError) {
-                            const { data: coverUrlData } = supabase.storage
-                                .from('magazine-files')
-                                .getPublicUrl(coverFileName);
-                            coverUrl = coverUrlData.publicUrl;
-                        } else {
-                            console.error('Cover upload error:', coverError);
-                        }
-                    }
-                    
-                    progressFill.style.width = '75%';
-                    
-                    // Step 3: Get public URL for the uploaded file
+                    // Get public URL for the uploaded file
                     const { data: urlData } = supabase.storage
                         .from('magazine-files')
                         .getPublicUrl(filePath);
                     
-                    // Step 4: Save magazine metadata to database
+                    progressFill.style.width = '75%';
+                    
+                    // Save magazine metadata to database
                     const { data: magazineData, error: dbError } = await supabase
                         .from('magazines')
                         .insert([
@@ -1941,7 +1592,6 @@
                                 title: magazineTitle.value.trim(),
                                 issue_date: magazineDate.value + '-01',
                                 description: magazineDescription.value.trim(),
-                                cover_url: coverUrl,
                                 file_url: urlData.publicUrl,
                                 file_path: filePath
                             }
@@ -1962,7 +1612,6 @@
                         uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload to Library';
                         uploadBtn.disabled = false;
                         selectedFile = null;
-                        selectedCoverFile = null;
                         magazineTitle.value = '';
                         magazineDate.value = '';
                         magazineDescription.value = '';
@@ -1971,7 +1620,6 @@
                             <p>Click to select a PDF file or drag and drop here</p>
                             <p class="file-size">Maximum file size: 50MB</p>
                         `;
-                        coverPreview.innerHTML = '<p>No cover image selected</p>';
                         uploadProgress.style.display = 'none';
                         
                         // Reload magazines to show the new one
@@ -1995,23 +1643,8 @@
                 }
             });
             
-            // Keyboard navigation for PDF viewer
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'ArrowRight' || e.key === ' ') {
-                    goToNextPage();
-                } else if (e.key === 'ArrowLeft') {
-                    goToPrevPage();
-                } else if (e.key === 'Escape') {
-                    if (isFullscreen) {
-                        exitFullscreen();
-                    } else {
-                        backToHomeBtn.click();
-                    }
-                }
-            });
-            
             // Initialize the app
-            updateAuthUI(); // Set initial UI state
+            updateAuthUI();
             loadMagazines();
         });
     </script>
